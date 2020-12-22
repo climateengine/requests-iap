@@ -93,10 +93,10 @@ class IAPAuth(requests.auth.AuthBase):
             ),
             algorithm="RS256",
         )
-
+    
     def is_jwt_expired(self, jwt_token):
         if (
-            jwt.decode(IAPAuth.google_iap_jwt, verify=False, algorithms=["HS256", "RS256", "ES256"])["iat"]
+            jwt.decode(IAPAuth.google_iap_jwt, verify=False, algorithms=["RS256", "HS256", "RS384", "HS384", "RS512", "HS512", "ES256"])["iat"]
             + self.jwt_soft_expiration
         ) < time.time():
             return True
